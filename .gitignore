@@ -7,3 +7,4 @@ dist/
 *.pyc
 *.pyo
 .eggs
+pysus/online_data/.ipynb_checkpoints/SIH-checkpoint.py
