@@ -23,6 +23,15 @@ def download(state: str, year: int, month: int, cache: bool=True) -> object:
     state = state.upper()
     year2 = int(str(year)[-2:])
     month = str(month).zfill(2)
+    
+    if year >= 2008:
+        fname = 'RD{}{}{}.dbc'.format(state, str(year2).zfill(2), month)
+        cachefile = os.path.join(CACHEPATH, 'SIH_' + fname.split('.')[0] + '_.parquet')
+        if os.path.exists(cachefile):
+            df = pd.read_parquet(cachefile)
+            return df
+
+    
     if year < 1992:
         raise ValueError("SIH does not contain data before 1994")
     ftp = FTP('ftp.datasus.gov.br')
